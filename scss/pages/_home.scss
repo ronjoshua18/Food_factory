@@ -1,14 +1,20 @@
 .banner{
     &__wrapper{
         min-height: calc(100vh - 60px);
+        @include mediaQuery($mobile){
+            margin-top: 5rem;
+            flex-direction: column;
+            min-height: auto;
+            justify-content: flex-start;
+            gap: 5rem;
+        }
     }
     &__content{
         max-width: 50rem;
         width: 100%;
         h1{
-            font-size: clamp(3rem,6vw,6rem);
-            font-weight: bold;
-            margin-bottom: 2rem;
+            font-size: clamp(3rem,6vw,6rem);          
+        margin-bottom: 2rem;
             line-height: 1.2;
             span{
                 color: $clr-primary;
@@ -31,9 +37,10 @@
 // PRODUCT
 
 .product__cards{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 2rem;
+    @include grid(4, 2rem);
+    @include mediaQuery($mobile) {
+        @include grid(1, 2rem);
+    }
 }
 
 .product__item{
@@ -93,7 +100,7 @@
         }
 
         small{
-            font-weight: bold;
+           
             font-size: 1.2rem;
             opacity: 0.6;
         }
@@ -164,6 +171,10 @@
      background-size: cover;
     background-position-x:658px;
     background-position-y:-200px;
+    @include mediaQuery($mobile){
+        background-position-x:0px;
+    background-position-y:-0px;
+    }
     &__content{
         background-color: $clr-primary;
         color: $clr-light;
@@ -173,6 +184,11 @@
         display: grid;
         place-items: center;
         justify-content: flex-start;
+
+        @include mediaQuery($mobile){
+            width: 100%;
+            background-color: rgba($clr_primary, 0.8);
+        }
         &::before{
             content: '';
             position: absolute;
@@ -181,6 +197,11 @@
             height: 100%;
             width: 40vw;
             background-color: $clr-primary;
+
+            @include mediaQuery($mobile){
+                padding: 2rem 0;
+                display: none;
+            }
         }
 
         .inner{
@@ -195,7 +216,7 @@
 
             h2{
                 font-size: clamp(3rem, 6vw, 5rem );
-                font-weight: bold;
+                
                 margin: 4rem 0 3rem;
             }
 
@@ -210,9 +231,11 @@
 //Work
 
 .work__wrapper{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 2rem;
+    @include grid(4, 2rem);
+    @include mediaQuery($mobile){
+        @include grid(1, 2rem)
+    }
+    
     .work__card{
         padding: 2rem;
         border-radius: 2rem;
@@ -247,19 +270,33 @@
         padding: 2rem 10rem;
         background-color: lighten($clr-primary-light,25);
         border-radius: 3rem;
-        display: grid;
-        grid-template-columns: 2fr 1fr;
+        @include gridUneven(2fr 1fr, 2rem);
+        @include mediaQuery($mobile){
+            padding: 2rem;
+            @include gridUneven(1fr, 2rem);
+            max-height: 64rem;
+        }
         height: 100%;
         max-height: 44rem;
         overflow: hidden;
     }
+
+    // &__img{
+    //     @include mediaQuery($mobile){
+    //         text-align: center;
+    //         margin-top: 1rem;
+
+
+    //     }
+
+    // }
 
     &__content{
         max-width: 55rem;
         width:1000%;
        h2{
         font-size: clamp(3rem, 6vw, 5rem);
-        font-weight: bold;
+       
         margin: 4rem 0 3rem;
         span{
             color: $clr-primary;
@@ -279,15 +316,14 @@
 
 .testimonials{
     &__wrapper{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-gap: 2rem;
+        @include grid(3, 2rem);
+        @include mediaQuery($mobile){
+            @include grid(1, 2rem)
+        }
     }
 
     &__card {
-        display: grid;
-        grid-template-columns: 1fr 1.8fr;
-        grid-gap: 1rem;
+        @include gridUneven(1fr 1.8fr, 2rem);
         border-radius: 1rem;
         box-shadow: $shadow;
         padding: 1rem;
@@ -324,11 +360,10 @@
 
         }
         img{
-            width: 10rem;
-            height: 10rem;
+            @include imgFit(10rem, 10rem);
             border-radius: 50%;
             object-fit: cover;
-            transition: .5 ease;
+            
             
           
            }
@@ -336,7 +371,6 @@
         }
 
         h4{
-            font-weight: bold;
             font-size: 2rem;
             line-height: 1;
         }
@@ -368,18 +402,16 @@
     linear-gradient(rgba($clr-dark, 0.6), rgba($clr-dark, 0.6)), url(/img/back.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    display: flex;
-    justify-content: center;
-    text-align: center;
+    @include centerAll;
 
     &__wrapper{
         max-width: 65rem;
         width: 100%;
         margin: 0 auto;
         color: $clr-light;
+        text-align: center;
         h2{
             font-size: clamp(2rem ,6vw,4rem);
-            font-weight: bold;
             span{
                 color: $clr_primary;
             }
@@ -409,6 +441,10 @@
                 padding: .8rem 1.6rem;
                 transform: translateX(-12px);
                 border: 3px solid $clr_light;
+                @include mediaQuery($mobile){
+                    width: 28rem;
+                margin-top: 1rem;  
+            transform: translateX(0rem);              }
             }
         }
     }
@@ -428,15 +464,12 @@
     }
 
     .faq__question{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        @include centerbetween;
         padding: 1.5rem 3rem;
         cursor: pointer;
 
         h3{
             font-size: 2.5rem;
-            font-weight: bold;
         }
 
         i{
